@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+        Welcome, #{user.name}! (Admin)
+            
+            <br/>
+            <h:link value="Go to logout page" outcome="logoutPage_admin"/>
+            <br/>
+            <h:link value="Admin-Register" outcome="registration_admins"/>
+            <br/>
+        </h:form> 
+        <h:form>
+            <h:commandButton title="Go Back" value="Go Back" id="back_button" label="Go back comment button" type="back" action="index"/>
+            <br/><br/>
+            
+        </h:form>
+        
+        
+        
+        <h:form>
+           <h:outputStylesheet library="css" name="newcss.css"/>
+           <header> All user accounts:</header>
+            
+            <h:messages title="Error Messages:" id="messages"/>
+            <h:dataTable value="#{visitorBean.allComments}" var="comment" frame="border"
+                         styleClass="commentTable"
+                         headerClass="commentTableHeader"
+                         rowClasses="commentTableOddRow,commentTableEvenRow">
+                <h:column>
+                    <f:facet name="header">Username</f:facet>
+                        #{comment.username}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                        #{comment.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                        #{comment.email}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Money</f:facet>
+                        #{comment.money}
+                </h:column>
+                <h:column><h:commandButton id="remove" type="remove" value="remove" 
+                                           action="#{visitorBean.removeAccountByID(comment.id, comment.username)}" title="remove"/></h:column>
+                
+            </h:dataTable>
+        </h:form>
+        
+    </h:body>
+    
+   <br/><br/> <h:form>All Transactions:</h:form>
+    <h:body>
+        <h:form>
+            <h:outputStylesheet library="css" name="newcss.css"/>
+           <header>Finished Transaction Details: </header>
+            <h:messages title="Error Messages:" id="messages"/>
+            <h:dataTable value="#{user.getAllByFinishedProcess()}" var="userE" frame="border"
+                         styleClass="commentTable"
+                         headerClass="commentTableHeader"
+                         rowClasses="commentTableOddRow,commentTableEvenRow">
+                
+                <h:column><f:facet name="header">From:</f:facet>#{userE.payer},</h:column>
+                <h:column><f:facet name="header">To:</f:facet>#{userE.payee},</h:column>
+                <h:column><f:facet name="header">Amount !</f:facet>#{userE.amount}</h:column>
+                <h:column><f:facet name="header">Process !</f:facet>#{userE.process}</h:column>
+                <h:column><h:commandButton id="remove" type="remove" value="remove" 
+                                           action="#{user.removeTransByID(userE.id)}" title="remove"/></h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+    <br/><br/>
+    
+    <h:body>
+        <h:form>
+            <h:outputStylesheet library="css" name="newcss.css"/>
+           <header>Requesting Transaction Details:</header>
+            <h:messages title="Error Messages:" id="messages"/>
+            <h:dataTable value="#{user.getAllByRequestedProcess()}" var="userE" frame="border"
+                         styleClass="commentTable"
+                         headerClass="commentTableHeader"
+                         rowClasses="commentTableOddRow,commentTableEvenRow">
+                
+                <h:column><f:facet name="header">Payer:</f:facet>#{userE.payer},</h:column>
+                <h:column><f:facet name="header">Requester:</f:facet>#{userE.payee},</h:column>
+                <h:column><f:facet name="header">Amount !</f:facet>#{userE.amount}</h:column>
+                <h:column><f:facet name="header">Process !</f:facet>#{userE.process}</h:column>
+                <h:column><h:commandButton id="remove" type="remove" value="remove" 
+                                           action="#{user.removeTransByID(userE.id)}" title="remove"/></h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body><br/><br/>
+    
+    <h:body>
+        <h:form>
+            <h:outputStylesheet library="css" name="newcss.css"/>
+           <header>Rejected Transaction Details:</header>
+            <h:messages title="Error Messages:" id="messages"/>
+            <h:dataTable value="#{user.getAllByRejectedProcess()}" var="userE" frame="border"
+                         styleClass="commentTable"
+                         headerClass="commentTableHeader"
+                         rowClasses="commentTableOddRow,commentTableEvenRow">
+                
+                <h:column><f:facet name="header">Payer:</f:facet>#{userE.payer},</h:column>
+                <h:column><f:facet name="header">Requester:</f:facet>#{userE.payee},</h:column>
+                <h:column><f:facet name="header">Amount !</f:facet>#{userE.amount}</h:column>
+                <h:column><f:facet name="header">Process !</f:facet>#{userE.process}</h:column>
+                <h:column><h:commandButton id="remove" type="remove" value="remove" 
+                                           action="#{user.removeTransByID(userE.id)}" title="remove"/></h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
+  
+
+
+
